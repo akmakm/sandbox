@@ -1,0 +1,17 @@
+function flipHexString(hexValue, hexDigits) {
+  var h = hexValue.substr(0, 2);
+  for (var i = 0; i < hexDigits; ++i) {
+    h += hexValue.substr(2 + (hexDigits - 1 - i) * 2, 2);
+  }
+  return h;
+}
+
+
+function hexToFloat(hex) {
+  var s = hex >> 31 ? -1 : 1;
+  var e = (hex >> 23) & 0xFF;
+  return s * (hex & 0x7fffff | 0x800000) * 1.0 / Math.pow(2, 23) * Math.pow(2, (e - 127))
+}
+
+console.log(hexToFloat(flipHexString("0xD5672E42", 8)));
+console.log(hexToFloat(flipHexString("0x6FC18842", 8)));
